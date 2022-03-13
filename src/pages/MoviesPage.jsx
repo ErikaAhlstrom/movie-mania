@@ -75,27 +75,27 @@ const MoviesPage = () => {
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
           {moviesPage1?.map((movie, index) => (
-          <Grid sx={{ w:"100%"}} item xs={2} sm={4} md={4} key={index}>
+          <Grid sx={{ w:"100%"}} item xs={4} sm={4} md={4} key={index}>
               <MovieCard movieProps={movie}/>
           </Grid>
           ))} 
           {moviesPage2?.map((movie, index) => (
-          <Grid sx={{ w:"100%"}} item xs={2} sm={4} md={4} key={index}>
+          <Grid sx={{ w:"100%"}} item xs={4} sm={4} md={4} key={index}>
               <MovieCard movieProps={movie}/>
           </Grid>
           ))} 
           {moviesPage3?.map((movie, index) => (
-          <Grid sx={{ w:"100%"}} item xs={2} sm={4} md={4} key={index}>
+          <Grid sx={{ w:"100%"}} item xs={4} sm={4} md={4} key={index}>
               <MovieCard movieProps={movie}/>
           </Grid>
           ))} 
           {moviesPage4?.map((movie, index) => (
-          <Grid sx={{ w:"100%"}} item xs={2} sm={4} md={4} key={index}>
+          <Grid sx={{ w:"100%"}} item xs={4} sm={4} md={4} key={index}>
               <MovieCard movieProps={movie}/>
           </Grid>
           ))} 
           {moviesPage5?.map((movie, index) => (
-          <Grid sx={{ w:"100%"}} item xs={2} sm={4} md={4} key={index}>
+          <Grid sx={{ w:"100%"}} item xs={4} sm={4} md={4} key={index}>
               <MovieCard movieProps={movie}/>
           </Grid>
           ))} 
