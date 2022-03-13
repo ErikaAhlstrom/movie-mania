@@ -23,35 +23,39 @@ export function MovieDetailsPage(props) {
     setMovie(getMovieByIdResponse.data);
   }
 
-
   function handleClick() {
     history.push("/");
   }
-  
-
   return (
     <>
-    <Card sx={{ display: 'flex', m:2 }}>
-        <CardContent>
-          <Typography sx={{my:3}} variant="h5">
-          {movie?.original_title}
+    <Card  
+      sx={{ 
+        display: 'flex', 
+        flexDirection: {
+          md: "row",
+          xs:"column"
+        } 
+      }}>
+      <CardContent>
+        <Typography sx={{my:3}} variant="h5">
+        {movie?.original_title}
+        </Typography>
+        <Typography variant="subtitle1" color="text.secondary">
+        {movie?.overview}
+        </Typography>
+        <Box sx={{ alignItems: 'center', display: 'flex', flexDirection: 'row' }}>
+          <StarIcon />
+          <Typography sx={{ alignItems: 'center', fontSize: '24px', p:.5 }} variant="body1" color="text.secondary">
+            {movie?.vote_average}
           </Typography>
-          <Typography variant="subtitle1" color="text.secondary">
-          {movie?.overview}
-          </Typography>
-          <Box sx={{ alignItems: 'center', display: 'flex', flexDirection: 'row' }}>
-            <StarIcon />
-            <Typography sx={{ alignItems: 'center', fontSize: '24px', p:.5 }} variant="body1" color="text.secondary">
-             {movie?.vote_average}
-            </Typography>
-          </Box>
-        </CardContent>
+        </Box>
+      </CardContent>
       <CardMedia
         component="img"
         sx={{ width: 400}}
         image={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
         alt="Live from space album cover"
-        />
+      />
     </Card>
     <Button 
       sx={{ display: 'flex', m:2 }} 
@@ -61,7 +65,7 @@ export function MovieDetailsPage(props) {
       }}>
       Back
     </Button>
-      </>
+    </>
   );
 }
 
