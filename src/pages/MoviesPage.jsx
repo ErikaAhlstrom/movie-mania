@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { getPopularMoviesFetch } from '../fetches/fetches'
+import React, { useState } from 'react';
+import { getPopularMoviesByPageIdFetch } from '../fetches/fetches'
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import Button from '@mui/material/Button';
-import ActionAreaMovieCard from '../components/MovieCard';
+import MovieCard from '../components/MovieCard';
 import Grid from '@mui/material/Grid';
-
 
 const MoviesPage = () => {
 
@@ -19,11 +18,11 @@ const MoviesPage = () => {
   
   function getPopularMovies() {
     Promise.all([
-      getPopularMoviesFetch(1),
-      getPopularMoviesFetch(2),
-      getPopularMoviesFetch(3),
-      getPopularMoviesFetch(4),
-      getPopularMoviesFetch(5)
+      getPopularMoviesByPageIdFetch(1),
+      getPopularMoviesByPageIdFetch(2),
+      getPopularMoviesByPageIdFetch(3),
+      getPopularMoviesByPageIdFetch(4),
+      getPopularMoviesByPageIdFetch(5)
     ]).then(allResponses => {
       setMoviesPage1(allResponses[0].data.results)
       setMoviesPage2(allResponses[1].data.results)
@@ -35,12 +34,18 @@ const MoviesPage = () => {
 
   function handleClick() {
     setIsLoading(true)
+    // Setting a timeout so the CircularProgress gets its time in the spotlight for 1 sec.
     setTimeout(() => { setAllIsLoaded(true)}, 1000);
     getPopularMovies()
   }
 
   return (
     <Box sx={{m:4, display: "flex", justifyContent: "center", flexDirection: 'column'}} className="App"> 
+
+   { /**********************************
+     * Renders on application start
+    **********************************/}
+
     { !allIsLoaded && !isLoading &&
     <Button 
       onClick={() => {
@@ -51,37 +56,47 @@ const MoviesPage = () => {
     </Button>
     }
 
+  { /**********************************
+     * Renders after button click
+     * Fetching API data
+    **********************************/}
+
     {isLoading && !allIsLoaded &&
     <Box sx={{display: "flex", justifyContent: "center", p:5}}>
       <CircularProgress/>
     </Box>}
+
+    { /**********************************
+     * Renders when all movies are loaded
+    **********************************/}
+
     {allIsLoaded &&
     <>
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
           {moviesPage1?.map((movie, index) => (
           <Grid sx={{ w:"100%"}} item xs={2} sm={4} md={4} key={index}>
-              <ActionAreaMovieCard movieProps={movie}/>
+              <MovieCard movieProps={movie}/>
           </Grid>
           ))} 
           {moviesPage2?.map((movie, index) => (
           <Grid sx={{ w:"100%"}} item xs={2} sm={4} md={4} key={index}>
-              <ActionAreaMovieCard movieProps={movie}/>
+              <MovieCard movieProps={movie}/>
           </Grid>
           ))} 
           {moviesPage3?.map((movie, index) => (
           <Grid sx={{ w:"100%"}} item xs={2} sm={4} md={4} key={index}>
-              <ActionAreaMovieCard movieProps={movie}/>
+              <MovieCard movieProps={movie}/>
           </Grid>
           ))} 
           {moviesPage4?.map((movie, index) => (
           <Grid sx={{ w:"100%"}} item xs={2} sm={4} md={4} key={index}>
-              <ActionAreaMovieCard movieProps={movie}/>
+              <MovieCard movieProps={movie}/>
           </Grid>
           ))} 
           {moviesPage5?.map((movie, index) => (
           <Grid sx={{ w:"100%"}} item xs={2} sm={4} md={4} key={index}>
-              <ActionAreaMovieCard movieProps={movie}/>
+              <MovieCard movieProps={movie}/>
           </Grid>
           ))} 
         </Grid>
