@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { Helmet } from "react-helmet";
 import './App.css';
 import MoviesPage from './pages/MoviesPage';
 import ResponsiveAppBar from './components/Header';
@@ -16,6 +17,10 @@ function App() {
 
   return (
     <>
+    <Helmet>
+      <meta charSet="utf-8" />
+      <title>Movie Mania</title>
+    </Helmet>
     <ResponsiveAppBar />
     <Switch>
       <Route path="/movies/:id" component={MovieDetailsPage}>
