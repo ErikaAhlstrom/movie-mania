@@ -1,10 +1,12 @@
 import React, { useState, useEffect} from 'react';
+import {Route, Switch} from 'react-router-dom';
 import './App.css';
 import { getPopularMoviesFetch } from './fetches/fetches'
 import Box from '@mui/material/Box';
 import ResponsiveAppBar from './components/Header';
 import CircularProgress from '@mui/material/CircularProgress';
 import MoviesPage from './pages/MoviesPage';
+import MovieDetailsPage from './pages/MovieDetailsPage';
 import Button from '@mui/material/Button';
 
 
@@ -31,26 +33,32 @@ function App() {
   return (
     <>
     <ResponsiveAppBar />
-    <Box sx={{m:4, display: "flex", justifyContent: "center", flexDirection: 'column'}} className="App"> 
-    { !movies && !isLoading &&
-    <Button 
-      onClick={() => {
-        handleClick()
-      }}
-      variant="contained">
-      Get Movies
-    </Button>
-    }
+    <Switch>
+      <Route path="/movies/:id" component={MovieDetailsPage}>
 
-    {isLoading && !movies &&
-    <Box sx={{display: "flex", justifyContent: "center", p:5}}>
-      <CircularProgress/>
-    </Box>}
-    {movies &&
-     <MoviesPage moviesProps={movies}/>
-    }
-    
-    </Box>
+      </Route>
+      <Route path="/">
+        <Box sx={{m:4, display: "flex", justifyContent: "center", flexDirection: 'column'}} className="App"> 
+          { !movies && !isLoading &&
+          <Button 
+            onClick={() => {
+              handleClick()
+            }}
+            variant="contained">
+            Get Movies
+          </Button>
+          }
+
+          {isLoading && !movies &&
+          <Box sx={{display: "flex", justifyContent: "center", p:5}}>
+            <CircularProgress/>
+          </Box>}
+          {movies &&
+            <MoviesPage moviesProps={movies}/>
+          }
+        </Box>
+      </Route>
+    </Switch>
     </>
   );
 }
