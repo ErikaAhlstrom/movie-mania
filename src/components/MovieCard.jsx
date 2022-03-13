@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 
-export default function ActionAreaMovieCard({movieProps}) {
+export default function MovieCard({movieProps}) {
   const history = useHistory();
   function handleClick() {
     history.push(`/movies/${movieProps.id}`);
