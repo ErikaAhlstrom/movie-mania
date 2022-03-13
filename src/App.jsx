@@ -1,40 +1,59 @@
 import React, { useState, useEffect} from 'react';
 import './App.css';
-import ActionAreaMovieCard from './components/MovieCard';
 import { getPopularMoviesFetch } from './fetches/fetches'
-import { experimentalStyled as styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
+import ResponsiveAppBar from './components/Header';
+import CircularProgress from '@mui/material/CircularProgress';
+import MoviesPage from './pages/MoviesPage';
+import Button from '@mui/material/Button';
+
 
 
 function App() {
 
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
+/*   useEffect(() => {
     getPopularMovies()
-  }, [])
+  }, []) */
   
   async function getPopularMovies() {
     const getPopularoviesResponse = await getPopularMoviesFetch()
     setMovies(getPopularoviesResponse.data.results);
-    // console.log(getPopularoviesResponse.data.results)
+  }
+
+  function handleClick() {
+    setIsLoading(true)
+    setTimeout(() => {getPopularMovies()}, 2000);
   }
 
   return (
-    <div className="App"> 
-    <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-       {movies?.map((movie, index) => (
-         <Grid item xs={2} sm={4} md={4} key={index}>
-        <ActionAreaMovieCard movieProps={movie}/>
-        </Grid>
-      ))} 
-      </Grid>
+    <>
+    <ResponsiveAppBar />
+    <Box sx={{m:4, display: "flex", justifyContent: "center", flexDirection: 'column'}} className="App"> 
+    { !movies && !isLoading &&
+    <Button 
+      onClick={() => {
+        handleClick()
+      }}
+      variant="contained">
+      Get Movies
+    </Button>
+    }
+
+    {isLoading && !movies &&
+    <Box sx={{display: "flex", justifyContent: "center", p:5}}>
+      <CircularProgress/>
+    </Box>}
+    {movies &&
+     <MoviesPage moviesProps={movies}/>
+    }
+    
     </Box>
-    </div>
+    </>
   );
 }
 
 export default App;
+
