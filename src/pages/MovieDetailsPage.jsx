@@ -30,7 +30,11 @@ export function MovieDetailsPage(props) {
     <>
     <Card  
       sx={{ 
-        display: 'flex', 
+        display: 'flex',
+        m: {
+          md: 5,
+          xs: 0
+        }, 
         flexDirection: {
           md: "row",
           xs:"column"
@@ -52,7 +56,10 @@ export function MovieDetailsPage(props) {
       </CardContent>
       <CardMedia
         component="img"
-        sx={{ width: 400}}
+        sx={{ width: {
+          md: 400,
+          xs: "auto",
+        }}}
         image={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
         alt="Live from space album cover"
       />
