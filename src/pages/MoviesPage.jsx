@@ -51,7 +51,12 @@ const MoviesPage = () => {
       onClick={() => {
         handleClick()
       }}
-      variant="contained">
+      variant="contained"
+      sx={{
+        width: "300px",
+        m: "auto",
+        mt: 5,
+      }}>
       Get Movies
     </Button>
     }
